@@ -8,7 +8,7 @@ data class Transaction (
 
     val id: String,
 
-    val wallet: Wallet,
+    val costCenter: CostCenter,
     val value: BigDecimal,
     val transactionType: TransactionType,
 

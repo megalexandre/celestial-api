@@ -65,18 +65,11 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
 	testImplementation("io.mockk:mockk:1.12.2")
 	testImplementation("com.github.tomakehurst:wiremock:1.18")
+
     /*
-
-
-
-
-
-
-
 	testImplementation("io.cucumber:cucumber-java:7.2.0")
 	testImplementation("io.cucumber:cucumber-junit:7.2.0")
 	testImplementation("io.cucumber:cucumber-spring:7.2.0")
-
     * */
 }
 
