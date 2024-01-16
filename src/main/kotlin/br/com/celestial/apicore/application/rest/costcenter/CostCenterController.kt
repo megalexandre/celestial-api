@@ -1,8 +1,10 @@
-package br.com.celestial.apicore.application.rest.user
+package br.com.celestial.apicore.application.rest.costcenter
 
+import br.com.celestial.apicore.application.rest.costcenter.request.CostCenterCreateRequest
+import br.com.celestial.apicore.application.rest.costcenter.response.CostCenterCreateResponse
 import br.com.celestial.apicore.application.rest.user.request.UserCreateRequest
 import br.com.celestial.apicore.application.rest.user.response.UserCreateResponse
-import br.com.celestial.apicore.domain.usecase.user.CreateUserUseCase
+import br.com.celestial.apicore.domain.usecase.costcenter.CreateCostCenterUsecase
 import jakarta.validation.Valid
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -14,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
 @RestController
-@RequestMapping("user", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
-class UserController(
-    private val create: CreateUserUseCase,
+@RequestMapping("costcenter", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
+class CostCenterController(
+    private val createCostCenter: CreateCostCenterUsecase,
 ){
 
     @PostMapping
-    fun create(@Valid @RequestBody request: UserCreateRequest): ResponseEntity<UserCreateResponse> =
-        created(URI("POST/user")).body(UserCreateResponse(create.execute(request.toEntity()))
+    fun create(@Valid @RequestBody request: CostCenterCreateRequest): ResponseEntity<CostCenterCreateResponse> =
+        created(URI("POST/CostCenter")).body(CostCenterCreateResponse(createCostCenter.execute(request.toEntity()))
     )
 
     /*

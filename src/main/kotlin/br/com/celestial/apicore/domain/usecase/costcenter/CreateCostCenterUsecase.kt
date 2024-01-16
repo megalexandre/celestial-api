@@ -5,7 +5,7 @@ import br.com.celestial.apicore.domain.usecase.interfaces.Usecase
 import org.springframework.stereotype.Service
 
 @Service
-class CreateCostCenter(
+class CreateCostCenterUsecase(
     //private val dataSource: CostCenterDataSource
 ): Usecase<CostCenter, CostCenter> {
     override fun execute(input: CostCenter): CostCenter = input
