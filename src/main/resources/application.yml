@@ -2,23 +2,16 @@ server:
     port: 8080
 
 spring:
+    #config.import:
+    #    - application.log.yml
     profiles:
         active: local
-
     data:
         mongodb:
             uri: mongodb://root:example@localhost:27017/
-            database: acal_v4
+            database: celestial
 
     jackson:
         time-zone: America/Sao_Paulo
         serialization:
             write-dates-as-timestamps: false
-
-logging:
-    logs:
-        level.org.springframework.data.mongodb.core: INFO
-    level:
-        org:
-            springframework:
-                data: DEBUG

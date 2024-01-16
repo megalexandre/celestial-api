@@ -16,6 +16,7 @@ class CreateUserUseCaseTest {
 
     @Test
     fun `GIVEN a new user is created WHEN document number already exists THEN do not save him`() {
+
         val user = userStub
 
         every {

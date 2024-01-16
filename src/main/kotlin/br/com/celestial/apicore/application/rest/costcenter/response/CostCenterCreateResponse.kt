@@ -5,7 +5,6 @@ import br.com.celestial.apicore.domain.entity.CostCenter
 
 data class CostCenterCreateResponse (
     val id: String,
-
 ): ResponseAdapter<CostCenter, CostCenterCreateResponse> {
     constructor(costCenter: CostCenter) : this(
         id = costCenter.id,
