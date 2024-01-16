@@ -1,10 +1,10 @@
-package br.com.celestial.apicore.resouces.repository
+package br.com.celestial.apicore.resouces.repository.centercost
 
 import br.com.celestial.apicore.resouces.document.CostCenterDocument
 import org.springframework.data.mongodb.repository.MongoRepository
 import java.util.*
 
 interface CenterCostRepository : MongoRepository<CostCenterDocument, String>{
-    fun findByNameNormalized(name: String): Optional<CostCenterDocument>
+    fun findByName(name: String): Optional<CostCenterDocument>
 
 }

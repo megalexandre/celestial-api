@@ -1,29 +1,21 @@
 package br.com.celestial.apicore.application.rest.user
 
-import br.com.celestial.apicore.application.rest.user.request.UserCreateRequest
-import br.com.celestial.apicore.application.rest.user.response.UserCreateResponse
-import br.com.celestial.apicore.domain.usecase.user.CreateUser
-import jakarta.validation.Valid
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
-import org.springframework.http.ResponseEntity
-import org.springframework.http.ResponseEntity.created
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.net.URI
 
 @RestController
 @RequestMapping("user", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
 class UserController(
-    private val create: CreateUser,
+    //private val create: CreateUserUseCase,
 ){
 
+    /*
     @PostMapping
     fun create(@Valid @RequestBody request: UserCreateRequest): ResponseEntity<UserCreateResponse> =
         created(URI("POST/user")).body(UserCreateResponse(create.execute(request.toEntity()))
-        )
-
+    )
+*/
     /*
     @PutMapping
     fun update(@Valid @RequestBody request: AddressUpdateRequest) = ok(update.execute(request.toEntity()))

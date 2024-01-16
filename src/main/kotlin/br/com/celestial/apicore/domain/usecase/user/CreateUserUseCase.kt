@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class CreateUser(
+class CreateUserUseCase(
     private val dataSource: UserDataSource
 ) : Usecase<User, User> {
 

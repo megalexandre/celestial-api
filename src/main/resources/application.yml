@@ -1,7 +1,24 @@
+server:
+    port: 8080
+
+spring:
+    profiles:
+        active: local
+
+    data:
+        mongodb:
+            uri: mongodb://root:example@localhost:27017/
+            database: acal_v4
+
+    jackson:
+        time-zone: America/Sao_Paulo
+        serialization:
+            write-dates-as-timestamps: false
+
 logging:
+    logs:
+        level.org.springframework.data.mongodb.core: INFO
     level:
-        org.springframework: ERROR
-    pattern:
-        console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
-        file: "%d %p %c{1.} [%t] %m%n"
-    file: app.log
+        org:
+            springframework:
+                data: DEBUG

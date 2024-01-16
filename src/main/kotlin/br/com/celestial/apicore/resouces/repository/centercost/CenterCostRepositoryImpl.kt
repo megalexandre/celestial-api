@@ -1,23 +1,41 @@
-package br.com.celestial.apicore.resouces.repository
+package br.com.celestial.apicore.resouces.repository.centercost
 
-import br.com.celestial.apicore.common.util.normalize
 import br.com.celestial.apicore.domain.datasource.CostCenterDataSource
 import br.com.celestial.apicore.domain.entity.CostCenter
-import br.com.celestial.apicore.resouces.adapter.toCostCenter
-import br.com.celestial.apicore.resouces.adapter.toCostCenterDocument
-import org.springframework.context.ApplicationEventPublisher
-import org.springframework.data.mongodb.core.MongoTemplate
-import org.springframework.data.mongodb.core.findById
 import org.springframework.stereotype.Service
-import kotlin.jvm.optionals.getOrNull
 
 @Service
 class CenterCostRepositoryImpl(
-    private val repository: CenterCostRepository,
-    private val mongoTemplate: MongoTemplate,
-    private val publisher: ApplicationEventPublisher,
+    //private val repository: CenterCostRepository,
+    //private val mongoTemplate: MongoTemplate,
+    //private val publisher: ApplicationEventPublisher,
 ): CostCenterDataSource {
+    override fun findByName(name: String): CostCenter? {
+        TODO("Not yet implemented")
+    }
 
+    override fun existsByName(name: String): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun save(t: CostCenter): CostCenter {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(id: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun findAll(): List<CostCenter> {
+        TODO("Not yet implemented")
+    }
+
+    override fun findById(id: String): CostCenter? {
+        TODO("Not yet implemented")
+    }
+}
+
+    /*
     override fun findByName(name: String): CostCenter? =
         repository.findByNameNormalized(name.normalize()).map {
             it.toCostCenter()
@@ -38,5 +56,4 @@ class CenterCostRepositoryImpl(
 
     override fun findById(id: String): CostCenter? =
         mongoTemplate.findById(id)
-
-}
+    */
