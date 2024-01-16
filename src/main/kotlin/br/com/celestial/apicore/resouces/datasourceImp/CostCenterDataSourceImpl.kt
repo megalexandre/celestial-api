@@ -28,16 +28,17 @@ class CostCenterDataSourceImpl(
         repository.save(t.toCostCenterDocument()).toCostCenter()
 
     override fun delete(id: String) {
-        TODO("Not yet implemented")
+        repository.deleteById(id)
     }
 
-    override fun findAll(): List<CostCenter> {
-        TODO("Not yet implemented")
-    }
+    override fun findAll(): List<CostCenter> =
+        repository.findAll().map { it.toCostCenter() }
 
-    override fun findById(id: String): CostCenter? {
-        TODO("Not yet implemented")
-    }
+    override fun findById(id: String): CostCenter? =
+        repository.findById(id).map {
+            it.toCostCenter()
+        }.getOrNull()
+
 }
 
     /*

@@ -2,7 +2,7 @@ package br.com.celestial.apicore.domain.usecase.user
 
 import br.com.celestial.apicore.domain.datasource.UserDataSource
 import br.com.celestial.apicore.domain.entity.User
-import br.com.celestial.apicore.domain.exception.InvalidUsecaseException
+import br.com.celestial.apicore.infrastructure.exception.InvalidUsecaseException
 import br.com.celestial.apicore.domain.usecase.Usecase
 import org.springframework.stereotype.Service
 

@@ -1,6 +1,6 @@
 package br.com.celestial.apicore.infrastructure
 
-import br.com.celestial.apicore.domain.exception.InvalidUsecaseException
+import br.com.celestial.apicore.infrastructure.exception.InvalidUsecaseException
 import java.time.LocalDateTime
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -16,7 +16,7 @@ class AppAdvice {
 	@ExceptionHandler(value = [InvalidUsecaseException::class])
 	fun e1 (ex: RuntimeException) = ResponseEntity.badRequest().body(
 		mapOf(
-			"time" to LocalDateTime.now(),
+			"time" to LocalDateTime.now().toString(),
 			"message" to ex.message
 		)
 	)

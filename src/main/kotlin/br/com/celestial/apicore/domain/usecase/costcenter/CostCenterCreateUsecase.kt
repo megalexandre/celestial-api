@@ -2,12 +2,12 @@ package br.com.celestial.apicore.domain.usecase.costcenter
 
 import br.com.celestial.apicore.domain.datasource.CostCenterDataSource
 import br.com.celestial.apicore.domain.entity.CostCenter
-import br.com.celestial.apicore.domain.exception.InvalidUsecaseException
+import br.com.celestial.apicore.infrastructure.exception.InvalidUsecaseException
 import br.com.celestial.apicore.domain.usecase.Usecase
 import org.springframework.stereotype.Service
 
 @Service
-class CreateCostCenterUsecase(
+class CostCenterCreateUsecase(
     private val costCenterDataSource: CostCenterDataSource
 ): Usecase<CostCenter, CostCenter> {
     override fun execute(input: CostCenter): CostCenter =

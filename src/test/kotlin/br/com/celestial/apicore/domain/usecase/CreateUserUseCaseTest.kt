@@ -1,7 +1,7 @@
 package br.com.celestial.apicore.domain.usecase
 
 import br.com.celestial.apicore.domain.datasource.UserDataSource
-import br.com.celestial.apicore.domain.exception.InvalidUsecaseException
+import br.com.celestial.apicore.infrastructure.exception.InvalidUsecaseException
 import br.com.celestial.apicore.domain.usecase.user.CreateUserUseCase
 import io.mockk.every
 import io.mockk.mockk
