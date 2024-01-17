@@ -2,9 +2,11 @@ package br.com.celestial.apicore.application.rest.costcenter
 
 import br.com.celestial.apicore.application.rest.costcenter.request.CostCenterCreateRequest
 import br.com.celestial.apicore.application.rest.costcenter.response.CostCenterCreateResponse
+import br.com.celestial.apicore.application.rest.costcenter.response.CostCenterFindAllResponse
 import br.com.celestial.apicore.application.rest.costcenter.response.CostCenterGetResponse
 import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterCreateUsecase
 import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterDeleteUsecase
+import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterFindAllUsecase
 import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterGetUsecase
 import jakarta.validation.Valid
 import java.net.URI
@@ -26,19 +28,21 @@ import org.springframework.web.bind.annotation.RestController
 class CostCenterController(
     private val create: CostCenterCreateUsecase,
     private val get: CostCenterGetUsecase,
+    private val findAll: CostCenterFindAllUsecase,
     private val delete: CostCenterDeleteUsecase,
 ){
 
     @PostMapping
     fun create(@Valid @RequestBody request: CostCenterCreateRequest): ResponseEntity<CostCenterCreateResponse> =
-        created(URI("POST/CostCenter")).body(
-            CostCenterCreateResponse(create.execute(request.toEntity())
-        )
-    )
+        created(URI("POST/CostCenter")).body(CostCenterCreateResponse(create.execute(request.toEntity())))
+
+    @GetMapping
+    fun getAll(): ResponseEntity<List<CostCenterFindAllResponse>> =
+        ok(findAll.execute(Unit)?.let { c ->  c.map {  CostCenterFindAllResponse(it) } } )
 
     @GetMapping("/{id}")
-    fun get(@Valid @PathVariable id: String) =
-        ok(get.execute(id)?.let {CostCenterGetResponse(it)})
+    fun get(@Valid @PathVariable id: String) :ResponseEntity<CostCenterGetResponse> =
+        ok(get.execute(id)?.let { CostCenterGetResponse(it)} )
 
     @DeleteMapping("/{id}")
     fun delete(@Valid @PathVariable id: String): ResponseEntity.HeadersBuilder<*> {
@@ -46,22 +50,5 @@ class CostCenterController(
         return noContent()
     }
 
-    /*
-    @PutMapping
-    fun update(@Valid @RequestBody request: AddressUpdateRequest) = ok(update.execute(request.toEntity()))
-
-    @GetMapping("/{id}")
-    fun findById(@PathVariable id: String) = findById.execute(id)?.let { ok().body(AddressResponse(it)) }
-
-    @GetMapping("/list")
-    fun findAll() = ok().body(findAll.execute(null).toAddressResponse() )
-
-    @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: String) = ok(delete.execute(id.trim()))
-
-    @PostMapping("/paginate")
-    fun paginate(@RequestBody pageFilterRequest: AddressPageFilterRequest) =
-        ok(paginate.execute(pageFilterRequest.toEntity()).toAddressPageResponse())
-     */
 }
 
