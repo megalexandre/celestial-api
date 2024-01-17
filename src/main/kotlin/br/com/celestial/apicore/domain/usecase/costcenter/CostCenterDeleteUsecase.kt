@@ -8,31 +8,12 @@ import org.springframework.stereotype.Service
 class CostCenterDeleteUsecase(
     private val costCenterDataSource: CostCenterDataSource,
     private val costCenterGetUsecase: CostCenterGetUsecase
-): Usecase<String, Boolean> {
+): Usecase<String, Unit> {
 
-    override fun execute(input: String): Boolean =
+    override fun execute(input: String) {
         costCenterGetUsecase.execute(input)?.let {
-            return when(it.expenses == null){
-                true -> {
-                    costCenterDataSource.delete(it.id)
-                    true
-                }
-                false -> false
-            }
-        } ?: false
-
-    /*
-    override fun execute(input: CostCenter): CostCenter =
-        valid(input).let {
-            costCenterDataSource.save(input)
+            costCenterDataSource.delete(it.id)
         }
-
-    private fun valid(costCenter: CostCenter){ with(costCenter){
-        costCenterDataSource.findByName(name = name)?.let {
-            throw InvalidUsecaseException("duplicated cost center name: $name")
-        }}
     }
-    * */
-
 
 }

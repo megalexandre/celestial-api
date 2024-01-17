@@ -11,6 +11,8 @@ import java.net.URI
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.created
+import org.springframework.http.ResponseEntity.noContent
+import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -36,14 +38,13 @@ class CostCenterController(
 
     @GetMapping("/{id}")
     fun get(@Valid @PathVariable id: String) =
-        get.execute(id)?.let {
-            CostCenterGetResponse(it)
-        }
+        ok(get.execute(id)?.let {CostCenterGetResponse(it)})
 
     @DeleteMapping("/{id}")
-    fun delete(@Valid @PathVariable id: String) =
+    fun delete(@Valid @PathVariable id: String): ResponseEntity.HeadersBuilder<*> {
         delete.execute(id)
-
+        return noContent()
+    }
 
     /*
     @PutMapping
