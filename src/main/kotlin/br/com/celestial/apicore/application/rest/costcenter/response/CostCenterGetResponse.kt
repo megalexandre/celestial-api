@@ -8,11 +8,12 @@ import java.math.BigDecimal.ZERO
 data class CostCenterGetResponse (
     val id: String,
     val name: String,
-    val value: BigDecimal? = ZERO,
+    val total: BigDecimal? = ZERO,
 ): ResponseAdapter<CostCenter, CostCenterGetResponse> {
     constructor(costCenter: CostCenter) : this(
         id = costCenter.id,
         name = costCenter.name,
+        total = costCenter.total
     )
     override fun toResponse(entity: CostCenter): CostCenterGetResponse = CostCenterGetResponse(entity)
 }

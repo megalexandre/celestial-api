@@ -4,12 +4,14 @@ import br.com.celestial.apicore.application.rest.costcenter.request.CostCenterCr
 import br.com.celestial.apicore.application.rest.costcenter.response.CostCenterCreateResponse
 import br.com.celestial.apicore.application.rest.costcenter.response.CostCenterGetResponse
 import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterCreateUsecase
+import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterDeleteUsecase
 import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterGetUsecase
 import jakarta.validation.Valid
 import java.net.URI
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.created
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,11 +24,14 @@ import org.springframework.web.bind.annotation.RestController
 class CostCenterController(
     private val create: CostCenterCreateUsecase,
     private val get: CostCenterGetUsecase,
+    private val delete: CostCenterDeleteUsecase,
 ){
 
     @PostMapping
     fun create(@Valid @RequestBody request: CostCenterCreateRequest): ResponseEntity<CostCenterCreateResponse> =
-        created(URI("POST/CostCenter")).body(CostCenterCreateResponse(create.execute(request.toEntity()))
+        created(URI("POST/CostCenter")).body(
+            CostCenterCreateResponse(create.execute(request.toEntity())
+        )
     )
 
     @GetMapping("/{id}")
@@ -34,6 +39,10 @@ class CostCenterController(
         get.execute(id)?.let {
             CostCenterGetResponse(it)
         }
+
+    @DeleteMapping("/{id}")
+    fun delete(@Valid @PathVariable id: String) =
+        delete.execute(id)
 
 
     /*

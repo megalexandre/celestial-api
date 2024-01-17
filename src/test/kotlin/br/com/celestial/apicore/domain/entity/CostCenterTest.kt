@@ -1,5 +1,6 @@
 package br.com.celestial.apicore.domain.entity
 
+import br.com.celestial.apicore.common.util.toMonetary
 import java.math.BigDecimal
 import java.math.BigDecimal.TEN
 import java.math.BigDecimal.ZERO
@@ -12,7 +13,7 @@ class CostCenterTest {
 
     @Test
     fun `GIVEN a cost center has no one expends WHEN call total THEN should be zero`() {
-        assertEquals(costCenterWithoutExpensesStub.total, ZERO)
+        assertEquals(ZERO.toMonetary(), costCenterWithoutExpensesStub.total)
     }
 
     @Test
@@ -24,19 +25,21 @@ class CostCenterTest {
             )
         )
 
-        assertEquals(costCenterWithTwoExpenses.total, BigDecimal(20))
+        assertEquals(BigDecimal(20).toMonetary(), costCenterWithTwoExpenses.total)
     }
 
     @Test
     fun `GIVEN a cost center has expends with cents WHEN call total THEN sum values`() {
+        val expected = BigDecimal("12.58").toMonetary()
+
         val costCenterWithExpensesAndCents = costCenterWithoutExpensesStub.copy(
             expenses = listOf(
-                expensesStub.copy(value = BigDecimal("1.22")),
-                expensesStub.copy(value = BigDecimal("7.99")),
-                expensesStub.copy(value = BigDecimal("3.37"))
+                expensesStub.copy(value = BigDecimal(1.22)),
+                expensesStub.copy(value = BigDecimal(7.99)),
+                expensesStub.copy(value = BigDecimal(3.37))
             )
         )
 
-        assertEquals(costCenterWithExpensesAndCents.total, BigDecimal("12.58"))
+        assertEquals(expected, costCenterWithExpensesAndCents.total)
     }
 }

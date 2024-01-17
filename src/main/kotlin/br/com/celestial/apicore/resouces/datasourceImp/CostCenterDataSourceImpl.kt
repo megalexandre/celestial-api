@@ -40,26 +40,3 @@ class CostCenterDataSourceImpl(
         }.getOrNull()
 
 }
-
-    /*
-    override fun findByName(name: String): CostCenter? =
-        repository.findByNameNormalized(name.normalize()).map {
-            it.toCostCenter()
-        }.getOrNull()
-
-    override fun existsByName(name: String): Boolean =
-        repository.findByNameNormalized(name).isPresent
-
-    override fun save(t: CostCenter): CostCenter =
-        repository.save(t.toCostCenterDocument()).toCostCenter()
-
-    override fun delete(id: String) {
-        repository.deleteById(id)
-    }
-
-    override fun findAll(): List<CostCenter> =
-        repository.findAll().map { it.toCostCenter() }
-
-    override fun findById(id: String): CostCenter? =
-        mongoTemplate.findById(id)
-    */

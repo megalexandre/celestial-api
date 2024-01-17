@@ -12,5 +12,4 @@ class CostCenterGetUsecase(
 
     override fun execute(input: String): CostCenter? = costCenterDataSource.findById(input)
 
-
 }
