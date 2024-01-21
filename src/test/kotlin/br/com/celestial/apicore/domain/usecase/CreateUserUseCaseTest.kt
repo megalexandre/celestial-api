@@ -2,7 +2,7 @@ package br.com.celestial.apicore.domain.usecase
 
 import br.com.celestial.apicore.domain.datasource.UserDataSource
 import br.com.celestial.apicore.infrastructure.exception.InvalidUsecaseException
-import br.com.celestial.apicore.domain.usecase.user.CreateUserUseCase
+import br.com.celestial.apicore.domain.usecase.user.UserCreateUsecase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -14,7 +14,7 @@ import stubs.entity.userStub
 class CreateUserUseCaseTest {
 
     private val dataSource = mockk<UserDataSource>()
-    private val useCase = CreateUserUseCase(dataSource = dataSource)
+    private val useCase = UserCreateUsecase(dataSource = dataSource)
 
     @Test
     fun `GIVEN a new user is created WHEN document number not exists THEN save him`() {

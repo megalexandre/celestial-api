@@ -12,5 +12,5 @@ val costCenterWithoutExpensesStub = CostCenter(
 val costCenterStub = CostCenter(
     id = random(),
     name = "teste",
-    expenses = listOf(expensesStub, expensesStub),
+    expenses = listOf(expenseStub, expenseStub),
 )

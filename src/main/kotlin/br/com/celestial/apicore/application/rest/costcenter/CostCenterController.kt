@@ -31,7 +31,6 @@ class CostCenterController(
     private val findAll: CostCenterFindAllUsecase,
     private val delete: CostCenterDeleteUsecase,
 ){
-
     @PostMapping
     fun create(@Valid @RequestBody request: CostCenterCreateRequest): ResponseEntity<CostCenterCreateResponse> =
         created(URI("POST/CostCenter")).body(CostCenterCreateResponse(create.execute(request.toEntity())))
@@ -49,6 +48,4 @@ class CostCenterController(
         delete.execute(id)
         return noContent()
     }
-
 }
-

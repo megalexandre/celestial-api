@@ -2,17 +2,15 @@ package br.com.celestial.apicore.domain.usecase.user
 
 import br.com.celestial.apicore.domain.datasource.UserDataSource
 import br.com.celestial.apicore.domain.entity.User
-import br.com.celestial.apicore.infrastructure.exception.InvalidUsecaseException
 import br.com.celestial.apicore.domain.usecase.Usecase
 import org.springframework.stereotype.Service
 
 
 @Service
-class GetUserUseCase(
+class UserFindAllUsecase(
     private val dataSource: UserDataSource
-) : Usecase<String, User> {
+) : Usecase<Unit, List<User>?> {
 
-    override fun execute(input: String): User =
-        dataSource.findById(input) ?: throw InvalidUsecaseException("does not exists an user with id: $input")
+    override fun execute(input: Unit): List<User>? = dataSource.findAll()
 
 }

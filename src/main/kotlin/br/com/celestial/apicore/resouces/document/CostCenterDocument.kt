@@ -1,9 +1,10 @@
 package br.com.celestial.apicore.resouces.document
 
+import br.com.celestial.apicore.resouces.document.interfaces.DocumentItem
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document(collection = "centercost")
+@Document(collection = "cost_center")
 data class CostCenterDocument(
 
     @Id
@@ -11,4 +12,6 @@ data class CostCenterDocument(
 
     val name: String,
 
-)
+    val expenses: List<ExpenseDocument>? = null
+
+): DocumentItem

@@ -2,7 +2,7 @@ package br.com.celestial.apicore.application.rest.user
 
 import br.com.celestial.apicore.application.rest.user.request.UserCreateRequest
 import br.com.celestial.apicore.application.rest.user.response.UserCreateResponse
-import br.com.celestial.apicore.domain.usecase.user.CreateUserUseCase
+import br.com.celestial.apicore.domain.usecase.user.UserCreateUsecase
 import jakarta.validation.Valid
 import java.net.URI
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("user", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
 class UserController(
-    private val create: CreateUserUseCase,
+    private val create: UserCreateUsecase,
 ){
 
     @PostMapping
