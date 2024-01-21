@@ -1,10 +1,9 @@
 package br.com.celestial.apicore.resouces.repository.user
 
-import br.com.celestial.apicore.resouces.document.CostCenterDocument
+import br.com.celestial.apicore.domain.entity.User
+import br.com.celestial.apicore.resouces.document.UserDocument
 import org.springframework.data.mongodb.repository.MongoRepository
-import java.util.*
 
-interface UserRepository : MongoRepository<CostCenterDocument, String>{
-    fun findByName(name: String): Optional<CostCenterDocument>
-
+interface UserRepository : MongoRepository<UserDocument, String>{
+    fun findByDocumentNumber(documentNumber: String): User?
 }

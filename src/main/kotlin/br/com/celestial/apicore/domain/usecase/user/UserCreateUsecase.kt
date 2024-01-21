@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service
 class UserCreateUsecase(
     private val dataSource: UserDataSource
 ) : Usecase<User, User> {
-
     override fun execute(input: User): User =
         valid(input).let {
             dataSource.save(input)
