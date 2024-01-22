@@ -6,7 +6,7 @@ import br.com.celestial.apicore.resouces.document.UserDocument
 fun User.toUserDocument() = UserDocument(
     id = this.id,
     name = this.name,
-    documentNumber = documentNumber,
+    documentNumber = documentNumber.number,
     phoneNumbers = phoneNumbers,
     active = active
 )

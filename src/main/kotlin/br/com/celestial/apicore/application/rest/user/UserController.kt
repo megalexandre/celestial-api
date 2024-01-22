@@ -12,6 +12,7 @@ import java.net.URI
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.created
+import org.springframework.http.ResponseEntity.noContent
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -29,7 +30,6 @@ class UserController(
     private val get: UserGetUsecase,
     private val findAll: UserFindAllUsecase,
 ){
-
     @PostMapping
     fun create(@Valid @RequestBody request: UserCreateRequest): ResponseEntity<UserCreateResponse> =
         created(URI("POST/user")).body(UserCreateResponse(create.execute(request.toEntity()))
@@ -46,7 +46,7 @@ class UserController(
     @DeleteMapping("/{id}")
     fun delete(@Valid @PathVariable id: String): ResponseEntity.HeadersBuilder<*> {
         delete.execute(id)
-        return ResponseEntity.noContent()
+        return noContent()
     }
 }
 

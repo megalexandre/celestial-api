@@ -16,7 +16,7 @@ class UserDataSourceImpl(
     //private val publisher: ApplicationEventPublisher,
 ): UserDataSource {
     override fun findByDocument(documentNumber: DocumentNumber): User? =
-        repository.findByDocumentNumber(documentNumber.number)
+        repository.findByDocumentNumber(documentNumber.number)?.toUser()
 
     override fun save(t: User): User =
         repository.save(t.toUserDocument()).toUser()

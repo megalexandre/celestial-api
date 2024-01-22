@@ -18,7 +18,7 @@ class UserCreateUsecase(
 
     private fun valid(user: User){ with(user){
         dataSource.findByDocument(documentNumber = documentNumber)?.let {
-            throw InvalidUsecaseException("duplicated document number: $documentNumber")
+            throw InvalidUsecaseException("duplicated document number: ${documentNumber.number}")
         }}
     }
 }

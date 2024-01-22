@@ -9,4 +9,3 @@ fun String.normalize(): String =
     normalize(this, NFD).replace("[^\\p{ASCII}]".toRegex(), "")
         .trim()
         .lowercase()
-

@@ -1,6 +1,5 @@
 package br.com.celestial.apicore.resouces.document
 
-import br.com.celestial.apicore.domain.entity.DocumentNumber
 import br.com.celestial.apicore.domain.entity.PhoneNumber
 import br.com.celestial.apicore.resouces.document.interfaces.DocumentItem
 import java.time.LocalDate
@@ -15,7 +14,7 @@ data class UserDocument(
 
     val name: String,
 
-    val documentNumber: DocumentNumber,
+    val documentNumber: String,
 
     var birthDay: LocalDate? = null,
 
