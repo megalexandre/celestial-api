@@ -22,30 +22,9 @@ data class DocumentNumber(
     }
 
     val isValid: Boolean = when(type){
-        INDIVIDUAL, LEGAL -> valid(number)
+        INDIVIDUAL -> CPF(number).valid
+        LEGAL -> CNPJ(number).valid
         UNKNOWN -> false
-    }
-
-    private fun valid(value: String): Boolean {
-        val numbers = value.filter { it.isDigit() }.map { it.toString().toInt() }.toIntArray()
-
-        if ((type == INDIVIDUAL && numbers.size != CPF_SIZE) ||
-            (type == LEGAL && numbers.size != CNPJ_SIZE) ||
-            numbers.toSet().size == 1
-        ) {
-            return false
-        }
-
-        val dv1 = verifyDigit(numbers.copyOf(if (type == INDIVIDUAL) 9 else 12))
-        val dv2 = verifyDigit(numbers.copyOf(if (type == INDIVIDUAL) 10 else 13).plus(dv1))
-
-        return dv1 == numbers[if (type == INDIVIDUAL) 9 else 12] && dv2 == numbers[if (type == INDIVIDUAL) 10 else 13]
-    }
-    private fun verifyDigit(number: IntArray): Int {
-        val start = number.size + 1
-        val sum = number.mapIndexed { i, d -> d * (start - i) }.sum()
-        val residual = sum % 11
-        return if (residual < 2) 0 else 11 - residual
     }
 
     override fun toString(): String = when(number.length > MAXIMUM_SIZE){
