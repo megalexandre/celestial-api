@@ -8,56 +8,52 @@ class DocumentNumberTest{
 
     @Test
     fun `when receiver wrong size digit should reject`(){
-        assertFalse(DocumentNumber("5485974503").isValid)
-        assertFalse(DocumentNumber("548597450355").isValid)
-        assertFalse(DocumentNumber("1130105400010").isValid)
-        assertFalse(DocumentNumber("113010540001031").isValid)
+        listOf(
+            "5485974503",
+            "548597450355",
+            "1130105400010",
+            "113010540001031"
+        ).forEach {
+            assertFalse(DocumentNumber(it).isValid)
+        }
     }
 
     @Test
     fun `when receiver an CPF with same digit should reject`(){
-        val invalid = listOf(
+        listOf(
             "00000000000","11111111111","22222222222","33333333333","44444444444",
             "55555555555","66666666666","77777777777","88888888888","99999999999"
-        )
-
-        invalid.forEach {
+        ).forEach {
             assertFalse(DocumentNumber(it).isValid)
         }
     }
 
     @Test
     fun `when receiver an CNPJ with same digit should reject`(){
-        val invalid = listOf(
+        listOf(
             "00000000000000", "11111111111111", "22222222222222", "33333333333333",
             "44444444444444", "55555555555555", "66666666666666", "77777777777777",
             "88888888888888", "99999999999999"
-        )
-
-        invalid.forEach {
+        ).forEach {
             assertFalse(DocumentNumber(it).isValid)
         }
     }
 
     @Test
     fun `when receiver an CPF invalid digit should reject`(){
-        val invalid = listOf(
+        listOf(
             "13009120061","34231397043","86597718088","28114819065",
             "54440787089","89905293010","91926930060","64859745035"
-        )
-
-        invalid.forEach {
+        ).forEach {
             assertFalse(DocumentNumber(it).isValid)
         }
     }
     @Test
     fun `when receiver an CNPJ invalid digit should reject`(){
-        val invalid = listOf(
+        listOf(
             "15964036000262","15674641000307","85647634000192","21640517000116",
             "43240073000173","94841503000180","12241033000103","73013983000175"
-        )
-
-        invalid.forEach {
+        ).forEach {
             assertFalse(DocumentNumber(it).isValid)
         }
     }

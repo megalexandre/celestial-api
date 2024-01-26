@@ -1,5 +1,6 @@
 package br.com.celestial.apicore.resouces.document
 
+import br.com.celestial.apicore.common.enums.ExpenseType
 import br.com.celestial.apicore.resouces.document.interfaces.DocumentItem
 import java.math.BigDecimal
 import java.time.LocalDateTime
@@ -12,12 +13,14 @@ data class ExpenseDocument(
     @Id
     val id: String,
 
-    val costCenter: CostCenterDocument,
+    val costCenterId: String,
 
     val value: BigDecimal,
+
+    val expenseType: ExpenseType,
 
     val reason: String,
 
     val createdAt: LocalDateTime,
 
-): DocumentItem
+    ): DocumentItem

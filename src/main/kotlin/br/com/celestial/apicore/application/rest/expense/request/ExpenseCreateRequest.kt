@@ -1,6 +1,7 @@
 package br.com.celestial.apicore.application.rest.expense.request
 
 import br.com.celestial.apicore.application.rest.components.adapter.RequestAdapter
+import br.com.celestial.apicore.common.enums.ExpenseType
 import br.com.celestial.apicore.domain.dto.expense.CreateExpense
 import io.azam.ulidj.ULID.random
 import jakarta.validation.constraints.NotEmpty
@@ -12,6 +13,8 @@ data class ExpenseCreateRequest (
     @field:NotEmpty(message = "campo motivo não pode ser vazio")
     val reason: String,
 
+    val expenseType: ExpenseType,
+
     val value: BigDecimal,
 
     val costCenterId: String
@@ -22,6 +25,7 @@ data class ExpenseCreateRequest (
         id = random(),
         value = value,
         reason = reason,
+        expenseType = expenseType,
         costCenterId = costCenterId,
         createdAt = now()
     )
