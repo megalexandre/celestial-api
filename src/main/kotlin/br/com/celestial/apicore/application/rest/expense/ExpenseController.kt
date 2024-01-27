@@ -1,11 +1,15 @@
 package br.com.celestial.apicore.application.rest.expense
 
 import br.com.celestial.apicore.application.rest.expense.request.ExpenseCreateRequest
+import br.com.celestial.apicore.application.rest.expense.response.ExpenseCreateResponse
+import br.com.celestial.apicore.application.rest.expense.response.ExpenseFindResponse
 import br.com.celestial.apicore.application.rest.expense.response.ExpenseGetResponse
+import br.com.celestial.apicore.application.rest.expense.response.toResponse
 import br.com.celestial.apicore.domain.usecase.expense.ExpenseCreateUsecase
 import br.com.celestial.apicore.domain.usecase.expense.ExpenseFindAllUsecase
 import br.com.celestial.apicore.domain.usecase.expense.ExpenseGetUsecase
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
@@ -24,13 +28,15 @@ class ExpenseController(
     private val findAll: ExpenseFindAllUsecase,
 ){
     @PostMapping
-    fun create(@Valid @RequestBody request: ExpenseCreateRequest) = create.execute(request.toEntity())
+    fun create(@Valid @RequestBody request: ExpenseCreateRequest): ResponseEntity<ExpenseCreateResponse> =
+        ResponseEntity(ExpenseCreateResponse(create.execute(request.toEntity())), CREATED)
 
     @GetMapping
-    fun getAll(): ResponseEntity<List<ExpenseGetResponse>> =
-        ok(findAll.execute(Unit)?.let { c -> c.map { ExpenseGetResponse(it) } })
+    fun getAll(): ResponseEntity<List<ExpenseFindResponse>> =
+        ok(findAll.execute(Unit)?.toResponse())
+
     @GetMapping("/{id}")
     fun get(@Valid @PathVariable id: String) :ResponseEntity<ExpenseGetResponse> =
-        ok(get.execute(id)?.let { ExpenseGetResponse(it) })
+        ok(ExpenseGetResponse(get.execute(id)))
 }
 
