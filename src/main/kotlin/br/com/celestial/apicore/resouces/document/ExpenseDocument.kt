@@ -13,6 +13,8 @@ data class ExpenseDocument(
     @Id
     val id: String,
 
+    val parentId: String? = null,
+
     val costCenterId: String,
 
     val value: BigDecimal,

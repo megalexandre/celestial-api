@@ -5,6 +5,7 @@ import br.com.celestial.apicore.resouces.document.ExpenseDocument
 
 fun ExpenseDocument.toExpense(): Expense = Expense(
     id = this.id,
+    parentId = this.parentId,
     value = this.value,
     reason = this.reason,
     expenseType = this.expenseType,

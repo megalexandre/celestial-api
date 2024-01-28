@@ -1,6 +1,5 @@
 package br.com.celestial.apicore.infrastructure
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
 import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.FAIL_ON_EMPTY_BEANS
@@ -21,7 +20,7 @@ class ObjectMapperConfig{
     fun objectMapper(): ObjectMapper = ObjectMapper()
         .disable(FAIL_ON_UNKNOWN_PROPERTIES)
         .disable(FAIL_ON_EMPTY_BEANS)
-        .setSerializationInclusion(NON_NULL)
+        //.setSerializationInclusion(NON_NULL)
         .registerModule(JavaTimeModule())
         .registerModule(
             Builder()
@@ -33,25 +32,6 @@ class ObjectMapperConfig{
                 .configure(StrictNullChecks, false)
             .build()
         )
-
-    /*
-     @Bean
-    fun objectMapper(): ObjectMapper = ObjectMapper()
-        .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-        .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-
-        .registerModule(JavaTimeModule())
-        .registerModule(
-            Builder()
-                .withReflectionCacheSize(512)
-                .configure(nullToEmptyCollection, false)
-                .configure(nullToEmptyMap, false)
-                .configure(nullIsSameAsDefault, false)
-                .configure(singletonSupport, false)
-                .configure(strictNullChecks, false)
-                .build()
-        )
-    * */
 
 }
 

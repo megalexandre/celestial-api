@@ -8,10 +8,9 @@ import br.com.celestial.apicore.domain.usecase.user.UserDeleteUsecase
 import br.com.celestial.apicore.domain.usecase.user.UserFindAllUsecase
 import br.com.celestial.apicore.domain.usecase.user.UserGetUsecase
 import jakarta.validation.Valid
-import java.net.URI
+import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
-import org.springframework.http.ResponseEntity.created
 import org.springframework.http.ResponseEntity.noContent
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -32,8 +31,7 @@ class UserController(
 ){
     @PostMapping
     fun create(@Valid @RequestBody request: UserCreateRequest): ResponseEntity<UserCreateResponse> =
-        created(URI("POST/user")).body(UserCreateResponse(create.execute(request.toEntity()))
-    )
+        ResponseEntity(UserCreateResponse(create.execute(request.toEntity())), CREATED)
 
     @GetMapping
     fun getAll(): ResponseEntity<List<UserGetResponse>> =
@@ -41,7 +39,7 @@ class UserController(
 
     @GetMapping("/{id}")
     fun get(@Valid @PathVariable id: String) :ResponseEntity<UserGetResponse> =
-        ok(get.execute(id)?.let { UserGetResponse(it) })
+        ok(UserGetResponse(get.execute(id)))
 
     @DeleteMapping("/{id}")
     fun delete(@Valid @PathVariable id: String): ResponseEntity.HeadersBuilder<*> {

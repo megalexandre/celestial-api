@@ -4,27 +4,24 @@ import br.com.celestial.apicore.application.rest.components.adapter.ResponseAdap
 import br.com.celestial.apicore.common.enums.ExpenseType
 import br.com.celestial.apicore.domain.entity.Expense
 import java.math.BigDecimal
-import java.time.LocalDateTime
 
-data class ExpenseFindResponse (
+data class ExpenseFindAllResponse (
     val id: String,
+    val parentId: String? = null,
     val value: BigDecimal,
     val reason: String,
     val expenseType: ExpenseType,
-    val costCenterId: String,
-    val createdAt: LocalDateTime,
 
-): ResponseAdapter<Expense, ExpenseFindResponse> {
+): ResponseAdapter<Expense, ExpenseFindAllResponse> {
     constructor(expense: Expense) : this(
         id = expense.id,
+        parentId = expense.parentId,
         value = expense.value,
         reason = expense.reason,
         expenseType = expense.expenseType,
-        costCenterId = expense.costCenterId,
-        createdAt = expense.createdAt,
     )
 
-    override fun toResponse(entity: Expense): ExpenseFindResponse =  ExpenseFindResponse(entity)
+    override fun toResponse(entity: Expense): ExpenseFindAllResponse =  ExpenseFindAllResponse(entity)
 }
 
-fun List<Expense>.toResponse(): List<ExpenseFindResponse> = this.map { ExpenseFindResponse(it) }
+fun List<Expense>.toResponse(): List<ExpenseFindAllResponse> = this.map { ExpenseFindAllResponse(it) }

@@ -14,6 +14,7 @@ class CreateExpense (
     val costCenterId: String,
     val createdAt: LocalDateTime,
 ) {
+
     fun toExpense(costCenter: CostCenter): Expense = Expense(
         id = id,
         value = value,

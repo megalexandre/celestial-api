@@ -5,7 +5,6 @@ import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 
 class DocumentNumberConstraint : ConstraintValidator<DocumentNumberValidator, String> {
-
     override fun isValid(value: String, cxt: ConstraintValidatorContext): Boolean = DocumentNumber(value).isValid
 
 }

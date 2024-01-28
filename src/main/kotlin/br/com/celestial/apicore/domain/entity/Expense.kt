@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 
 data class Expense (
     val id: String,
+    val parentId: String? = null,
     val value: BigDecimal,
     val reason: String,
     val expenseType: ExpenseType,

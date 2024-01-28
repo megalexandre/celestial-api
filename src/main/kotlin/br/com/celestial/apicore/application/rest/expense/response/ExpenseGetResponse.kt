@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 
 data class ExpenseGetResponse (
     val id: String,
+    val parentId: String? = null,
     val value: BigDecimal,
     val reason: String,
     val expenseType: ExpenseType,
@@ -17,6 +18,7 @@ data class ExpenseGetResponse (
 ): ResponseAdapter<Expense, ExpenseGetResponse> {
     constructor(expense: Expense) : this(
         id = expense.id,
+        parentId = expense.parentId,
         value = expense.value,
         reason = expense.reason,
         expenseType = expense.expenseType,
