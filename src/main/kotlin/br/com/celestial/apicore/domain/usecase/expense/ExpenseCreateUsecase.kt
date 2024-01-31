@@ -5,7 +5,7 @@ import br.com.celestial.apicore.domain.dto.expense.CreateExpense
 import br.com.celestial.apicore.domain.entity.Expense
 import br.com.celestial.apicore.domain.usecase.Usecase
 import br.com.celestial.apicore.domain.usecase.costcenter.CostCenterGetUsecase
-import br.com.celestial.apicore.infrastructure.Logger
+import br.com.celestial.apicore.infrastructure.Sl4jLogger
 import br.com.celestial.apicore.infrastructure.exception.InvalidUsecaseException
 import org.springframework.stereotype.Service
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class ExpenseCreateUsecase(
     private val dataSource: ExpenseDataSource,
     private val costCenterGet: CostCenterGetUsecase,
-): Usecase<CreateExpense, Expense>, Logger() {
+): Usecase<CreateExpense, Expense>, Sl4jLogger() {
     override fun execute(input: CreateExpense): Expense {
 
         costCenterGet.execute(input.costCenterId)
