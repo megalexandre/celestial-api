@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -29,11 +30,17 @@ dependencies {
 	implementation("jakarta.validation:jakarta.validation-api")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib")
-	implementation("ch.qos.logback:logback-classic:1.4.7")
 
+	implementation("ch.qos.logback:logback-classic")
+	implementation("org.slf4j:slf4j-api")
 
 	//ULID
 	implementation("io.azam.ulidj:ulidj:1.0.4")
+
+	implementation("com.google.code.gson:gson")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+	implementation("org.springframework.data:spring-data-mongodb")
+	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
 	//test
 	testImplementation("io.rest-assured:kotlin-extensions")
@@ -43,34 +50,21 @@ dependencies {
 	}
 	testImplementation("io.rest-assured:rest-assured")
 	testImplementation("org.mockito:mockito-core")
-	testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
-	testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
+
+	testImplementation("org.junit.jupiter:junit-jupiter")
+
 	testImplementation("io.mockk:mockk:1.12.2")
-	testImplementation("com.github.tomakehurst:wiremock:1.18")
-
-	implementation("com.google.code.gson:gson:2.10.1")
-	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-	implementation("org.springframework.data:spring-data-mongodb")
-	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-
-
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
-
 	testImplementation("org.testcontainers:junit-jupiter")
-	testImplementation("org.testcontainers:testcontainers:1.18.1")
-	testImplementation("org.testcontainers:mongodb:1.18.1")
-
+	testImplementation("org.testcontainers:testcontainers")
+	testImplementation("org.testcontainers:mongodb")
 	testImplementation("org.mockito:mockito-core")
-	testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
-	testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
-	testImplementation("io.mockk:mockk:1.12.2")
-	testImplementation("com.github.tomakehurst:wiremock:1.18")
 
-    /*
-	testImplementation("io.cucumber:cucumber-java:7.2.0")
-	testImplementation("io.cucumber:cucumber-junit:7.2.0")
-	testImplementation("io.cucumber:cucumber-spring:7.2.0")
-    * */
+	testImplementation("io.mockk:mockk")
+	testImplementation("org.wiremock:wiremock:3.3.1")
+	testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+
+
 }
 
 tasks.withType<KotlinCompile> {

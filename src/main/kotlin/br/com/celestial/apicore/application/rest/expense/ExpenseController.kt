@@ -9,6 +9,7 @@ import br.com.celestial.apicore.domain.usecase.expense.ExpenseCreateUsecase
 import br.com.celestial.apicore.domain.usecase.expense.ExpenseDeleteUsecase
 import br.com.celestial.apicore.domain.usecase.expense.ExpenseFindAllUsecase
 import br.com.celestial.apicore.domain.usecase.expense.ExpenseGetUsecase
+import br.com.celestial.apicore.infrastructure.Logger
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -30,10 +31,17 @@ class ExpenseController(
     private val get: ExpenseGetUsecase,
     private val findAll: ExpenseFindAllUsecase,
     private val delete: ExpenseDeleteUsecase,
-){
+): Logger() {
+
     @PostMapping
-    fun create(@Valid @RequestBody request: ExpenseCreateRequest): ResponseEntity<ExpenseCreateResponse> =
-        ResponseEntity(ExpenseCreateResponse(create.execute(request.toEntity())), CREATED)
+    fun create(@Valid @RequestBody request: ExpenseCreateRequest): ResponseEntity<ExpenseCreateResponse> = run {
+        logger.info("creating expense with data: $request")
+        ResponseEntity(ExpenseCreateResponse(create.execute(request.toEntity())), CREATED).also {
+            logger.info("created expense with data: $request")
+        }
+    }
+
+
 
     @DeleteMapping("/{id}")
     fun delete(@Valid @PathVariable id: String): ResponseEntity.HeadersBuilder<*> = run {

@@ -1,5 +1,6 @@
 package stubs.entity
 
+import br.com.celestial.apicore.common.enums.ExpenseType
 import br.com.celestial.apicore.domain.entity.Expense
 import io.azam.ulidj.ULID.random
 import java.math.BigDecimal.TEN
@@ -9,6 +10,7 @@ val expenseStub = Expense(
     id = random(),
     value =  TEN,
     reason = "Teste",
-    costCenter = costCenterStub,
+    expenseType = ExpenseType.IN,
+    costCenterId = random(),
     createdAt = now(),
 )
