@@ -2,11 +2,17 @@ package br.com.celestial.apicore.application.rest.task
 
 import br.com.celestial.apicore.application.rest.task.request.TaskCreateRequest
 import br.com.celestial.apicore.application.rest.task.response.TaskCreateResponse
+import br.com.celestial.apicore.application.rest.task.response.TaskGetResponse
 import br.com.celestial.apicore.domain.usecase.task.TaskCreateUsecase
+import br.com.celestial.apicore.domain.usecase.task.TaskGetUsecase
+import br.com.celestial.apicore.infrastructure.Sl4jLogger
+import br.com.celestial.apicore.infrastructure.info
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,10 +22,21 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("task", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
 class TaskController(
     private val create: TaskCreateUsecase,
-){
+    private val get: TaskGetUsecase,
+): Sl4jLogger() {
     @PostMapping
     fun create(@Valid @RequestBody request: TaskCreateRequest): ResponseEntity<TaskCreateResponse> =
-        ResponseEntity(TaskCreateResponse(create.execute(request.toEntity())), CREATED)
+        ResponseEntity(TaskCreateResponse(create.execute(request.toEntity())), CREATED).also {
+            logger.info {
+                "created task: $it"
+            }
+        }
+
+    @GetMapping("/{id}")
+    fun get(@Valid @PathVariable id: String): TaskGetResponse =
+        TaskGetResponse(get.execute(id)).also {
+            logger.info { "returning task $it" }
+        }
 
 }
 
