@@ -53,10 +53,11 @@ class ExpenseController(
     @GetMapping
     fun getAll(): ResponseEntity<List<ExpenseFindAllResponse>> = run {
         logger.info{"getting all expenses"}
-        ok(findAll.execute(Unit)?.toResponse())
+        ok(findAll.execute(Unit)?.toResponse()
             .also {
-                logger.info{"returning all expenses"}
-            }
+                logger.info{"returning all expenses $it"}
+            })
+
     }
 
     @GetMapping("/{id}")
