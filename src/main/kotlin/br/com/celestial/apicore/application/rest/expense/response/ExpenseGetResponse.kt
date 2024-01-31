@@ -25,6 +25,5 @@ data class ExpenseGetResponse (
         costCenterId = expense.costCenterId,
         createdAt = expense.createdAt,
     )
-    override fun toResponse(entity: Expense): ExpenseGetResponse =  ExpenseGetResponse(entity)
 }
 

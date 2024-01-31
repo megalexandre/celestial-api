@@ -9,7 +9,6 @@ data class CostCenterCreateResponse (
     constructor(costCenter: CostCenter) : this(
         id = costCenter.id,
     )
-    override fun toResponse(entity: CostCenter): CostCenterCreateResponse =  CostCenterCreateResponse(entity)
 }
 
 

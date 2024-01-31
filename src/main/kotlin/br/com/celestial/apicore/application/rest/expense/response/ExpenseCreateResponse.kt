@@ -9,6 +9,5 @@ data class ExpenseCreateResponse (
     constructor(expense: Expense) : this(
         id = expense.id,
     )
-    override fun toResponse(entity: Expense): ExpenseCreateResponse =  ExpenseCreateResponse(entity)
 }
 

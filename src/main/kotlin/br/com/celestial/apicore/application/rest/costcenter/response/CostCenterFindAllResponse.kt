@@ -19,7 +19,6 @@ data class CostCenterFindAllResponse (
         total = costCenter.total.toMonetary(),
         totalCurrentMonth = costCenter.totalCurrentMonth.toMonetary()
     )
-    override fun toResponse(entity: CostCenter): CostCenterFindAllResponse = CostCenterFindAllResponse(entity)
 }
 
 

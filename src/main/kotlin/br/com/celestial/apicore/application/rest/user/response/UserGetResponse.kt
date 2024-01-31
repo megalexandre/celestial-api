@@ -22,7 +22,6 @@ data class UserGetResponse (
         phoneNumbers = user.phoneNumbers ,
         active = user.active,
     )
-    override fun toResponse(entity: User): UserGetResponse =  UserGetResponse(entity)
 }
 
 

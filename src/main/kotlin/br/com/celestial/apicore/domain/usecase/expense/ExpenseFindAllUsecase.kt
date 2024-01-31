@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service
 class ExpenseFindAllUsecase(
     private val dataSource: ExpenseDataSource
 ) : Usecase<Unit, List<Expense>?> {
-
     override fun execute(input: Unit): List<Expense>? = dataSource.findAll()
 
 }

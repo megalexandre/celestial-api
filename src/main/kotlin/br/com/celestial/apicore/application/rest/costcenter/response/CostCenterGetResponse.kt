@@ -15,7 +15,6 @@ data class CostCenterGetResponse (
         name = costCenter.name,
         total = costCenter.total
     )
-    override fun toResponse(entity: CostCenter): CostCenterGetResponse = CostCenterGetResponse(entity)
 }
 
 

@@ -10,7 +10,6 @@ data class UserCreateResponse (
     constructor(user: User) : this(
         id = user.id,
     )
-    override fun toResponse(entity: User): UserCreateResponse =  UserCreateResponse(entity)
 }
 
 
