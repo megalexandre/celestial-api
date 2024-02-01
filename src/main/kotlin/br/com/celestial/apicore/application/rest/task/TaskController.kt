@@ -11,6 +11,7 @@ import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
+import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -26,17 +27,16 @@ class TaskController(
 ): Sl4jLogger() {
     @PostMapping
     fun create(@Valid @RequestBody request: TaskCreateRequest): ResponseEntity<TaskCreateResponse> =
-        ResponseEntity(TaskCreateResponse(create.execute(request.toEntity())), CREATED).also {
-            logger.info {
-                "created task: $it"
-            }
-        }
+        ResponseEntity(TaskCreateResponse(create.execute(request.toEntity())).also {
+            logger.info {"created task: $it"}
+        }, CREATED)
 
     @GetMapping("/{id}")
-    fun get(@Valid @PathVariable id: String): TaskGetResponse =
-        TaskGetResponse(get.execute(id)).also {
+    fun get(@Valid @PathVariable id: String): ResponseEntity<TaskGetResponse> = ok(
+        TaskGetResponse(get.execute(id).also {
             logger.info { "returning task $it" }
-        }
+        })
+    )
 
 }
 
