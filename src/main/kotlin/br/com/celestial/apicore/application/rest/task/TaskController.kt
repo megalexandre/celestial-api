@@ -3,7 +3,9 @@ package br.com.celestial.apicore.application.rest.task
 import br.com.celestial.apicore.application.rest.task.request.TaskCreateRequest
 import br.com.celestial.apicore.application.rest.task.request.TaskUpdateStatusRequest
 import br.com.celestial.apicore.application.rest.task.response.TaskCreateResponse
+import br.com.celestial.apicore.application.rest.task.response.TaskGetAllResponse
 import br.com.celestial.apicore.application.rest.task.response.TaskGetResponse
+import br.com.celestial.apicore.application.rest.task.response.toResponse
 import br.com.celestial.apicore.common.util.ResponseEntityUtil.Companion.created
 import br.com.celestial.apicore.domain.usecase.task.TaskCreateUsecase
 import br.com.celestial.apicore.domain.usecase.task.TaskDeleteUsecase
@@ -56,8 +58,10 @@ class TaskController(
     )
 
     @GetMapping
-    fun getAll(): ResponseEntity<List<TaskGetResponse>> =
-        ok(findAll.execute(Unit)?.let { c -> c.map { TaskGetResponse(it) } })
+    fun getAll(): ResponseEntity<List<TaskGetAllResponse>> =
+        ok(findAll.execute(Unit)?.toResponse().also {
+            logger.info { "getting all task: $it" }
+        })
 
     @DeleteMapping("/{id}")
     fun delete(@Valid @PathVariable id: String): ResponseEntity<Unit>  =
