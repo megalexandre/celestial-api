@@ -38,13 +38,14 @@ class TaskController(
     private val findAll: TaskFindAllUsecase,
 ): Sl4jLogger() {
     @PostMapping
-    fun create(@Valid @RequestBody request: TaskCreateRequest): ResponseEntity<Any> =
-        created(TaskCreateResponse(create.execute(request.toEntity()).also {
+    fun create(@Valid @RequestBody request: TaskCreateRequest): ResponseEntity<TaskCreateResponse> = created(
+        TaskCreateResponse(create.execute(request.toEntity()).also {
             logger.info { "created task $it" }
-        }))
+        })
+    )
 
     @PatchMapping
-    fun patchStatus(@Valid @RequestBody request: TaskUpdateStatusRequest): ResponseEntity<Any> = ok(
+    fun patchStatus(@Valid @RequestBody request: TaskUpdateStatusRequest): ResponseEntity<Unit> = ok(
         patch.execute(request.toEntity()).also {
             logger.info {"update status from task $it"}
         }
@@ -58,16 +59,18 @@ class TaskController(
     )
 
     @GetMapping
-    fun getAll(): ResponseEntity<List<TaskGetAllResponse>> =
-        ok(findAll.execute(Unit)?.toResponse().also {
+    fun getAll(): ResponseEntity<List<TaskGetAllResponse>> = ok(
+        findAll.execute(Unit)?.toResponse().also {
             logger.info { "getting all task: $it" }
-        })
+        }
+    )
 
     @DeleteMapping("/{id}")
-    fun delete(@Valid @PathVariable id: String): ResponseEntity<Unit>  =
-        noContent().apply { delete.execute(id).also {
+    fun delete(@Valid @PathVariable id: String): ResponseEntity<Unit> = noContent().apply {
+        delete.execute(id).also {
             logger.info{ "deleted task with id: $id" }
-        }}.build()
+        }
+    }.build()
 
 }
 

@@ -3,12 +3,12 @@ package br.com.celestial.apicore.application.rest.user
 import br.com.celestial.apicore.application.rest.user.request.UserCreateRequest
 import br.com.celestial.apicore.application.rest.user.response.UserCreateResponse
 import br.com.celestial.apicore.application.rest.user.response.UserGetResponse
+import br.com.celestial.apicore.common.util.ResponseEntityUtil.Companion.created
 import br.com.celestial.apicore.domain.usecase.user.UserCreateUsecase
 import br.com.celestial.apicore.domain.usecase.user.UserDeleteUsecase
 import br.com.celestial.apicore.domain.usecase.user.UserFindAllUsecase
 import br.com.celestial.apicore.domain.usecase.user.UserGetUsecase
 import jakarta.validation.Valid
-import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.noContent
@@ -30,8 +30,9 @@ class UserController(
     private val findAll: UserFindAllUsecase,
 ){
     @PostMapping
-    fun create(@Valid @RequestBody request: UserCreateRequest): ResponseEntity<UserCreateResponse> =
-        ResponseEntity(UserCreateResponse(create.execute(request.toEntity())), CREATED)
+    fun create(@Valid @RequestBody request: UserCreateRequest): ResponseEntity<UserCreateResponse> = created(
+        UserCreateResponse(create.execute(request.toEntity()))
+    )
 
     @GetMapping
     fun getAll(): ResponseEntity<List<UserGetResponse>> =
